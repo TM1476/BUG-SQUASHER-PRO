@@ -62,7 +62,7 @@
             width: 100%;
             height: 100%;
             position: absolute;
-            top: 100%; 
+            top: 100%; /* Hidden */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -88,6 +88,7 @@
         .btn-start { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(129, 140, 248, 0.4); }
         .btn-retry { background: var(--success); color: #064e3b; display: none; }
 
+        /* Win Overlay */
         #winOverlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -150,6 +151,7 @@
         let lastHole;
         let peepTimeout;
 
+        // Load High Score from Browser Memory
         let highScore = localStorage.getItem('bugHighScore') || 0;
         highBoard.textContent = highScore;
 
@@ -177,6 +179,7 @@
             bug.innerText = "🐛";
             bug.classList.add('up');
 
+            // Speed increases as score increases
             const duration = Math.max(350, 800 - (score * 4));
 
             peepTimeout = setTimeout(() => {
@@ -202,6 +205,7 @@
 
         function miss(e) {
             if (!gameActive) return;
+            // Only count as a miss if they hit the HOLE but not the BUG
             if (e.target.classList.contains('hole')) {
                 lives--;
                 livesBoard.innerText = "❤️".repeat(Math.max(0, lives));
